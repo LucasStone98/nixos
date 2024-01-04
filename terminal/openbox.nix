@@ -1,4 +1,4 @@
- pkgs, app, user, ... }:
+{ pkgs, app, user, ... }:
 
 let 
         autostart_script = ''
