@@ -8,7 +8,7 @@ in
 {
   imports =
     [ 
-      ../hardware-configuration.nix
+      /nix/hardware-configuration.nix
       ./openbox.nix
     ];
 
