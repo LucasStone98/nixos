@@ -10,7 +10,17 @@
 
     lib = nixpkgs.lib;
     systemArc = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${systemArc};
+
     essentials = ./essentials.nix;
+
+    # Script Imports
+    hwconf = pkgs.writeShellApplication {
+      name = "hwconf";
+      text = ''
+nixos-generate-config --show-hardware-config > /etc/nixos/hardware-configuration.nix
+      '';
+    };
 
   in { 
 
@@ -36,6 +46,13 @@
     };
 
     # Nix Apps/Derivaions (nix run /path/to/flake#app)
+    apps.${systemArc} = {
+      hwconf = {
+        type = "app";
+        program = "${hwconf}/bin/hwconf";
+      };
+    };
+
   };  
 }
 
