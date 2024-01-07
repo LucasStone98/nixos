@@ -8,7 +8,7 @@ in
 {
   imports =
     [ 
-      /nix/hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
       ./openbox.nix
     ];
 
@@ -42,25 +42,15 @@ in
   };
   
   environment.systemPackages = with pkgs; [
-    jq
-    tmux
     neovim
     cargo
-    wget
-    curl
-    git
-    gnumake
-    unzip
     feh
   ];
   
-  services.openssh.enable = true;
-
   services.spice-vdagentd.enable = true;
   services.spice-autorandr.enable = true;
   
   system.stateVersion = "23.11"; # Did you read the comment?
   
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
 

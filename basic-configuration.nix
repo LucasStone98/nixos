@@ -3,7 +3,7 @@
 {
   imports =
     [ 
-      /nix/hardware-configuration.nix
+      /etc/nixos/hardware-configuration.nix
     ];
 
   # This assumes alot... will need to change later
@@ -27,20 +27,11 @@
     ];
   };
   
-  environment.systemPackages = with pkgs; [
-    tmux
-    vim
-    wget
-    curl
-    git
-    gnumake
-    unzip
-  ];
-  
-  services.openssh.enable = true;
+  #environment.systemPackages = with pkgs; [
+  #  
+  #];
   
   system.stateVersion = "23.11"; # Did you read the comment?
   
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 }
 

@@ -7,19 +7,35 @@
 
   outputs = { self, nixpkgs, ... }:
   let 
+
     lib = nixpkgs.lib;
-    sysarc = "x86_64-linux";
+    systemArc = "x86_64-linux";
+    essentials = ./essentials.nix;
+
   in { 
+
+    # nixOS configurations (nixos-rebuild --flake, nixos-install --flake)
+    # Does not provide hardware-configuration.nix, but is required to work - nixos-generate-configuration
+    # Will need to pass --impure for /etc/nixos/hardware-configuration.nix
     nixosConfigurations = {
       basicNix = lib.nixosSystem {
-        system = sysarc;
-        modules = [ ./basic-configuration.nix ];
+        system = systemArc;
+        modules = [ 
+          essentials
+          ./basic-configuration.nix 
+        ];
       };
+
       terminalNix = lib.nixosSystem {
-        system = sysarc;
-        modules = [ ./terminal/configuration.nix ];
+        system = systemArc;
+        modules = [ 
+          essentials
+          ./terminal/configuration.nix 
+        ];
       };
     };
+
+    # Nix Apps/Derivaions (nix run /path/to/flake#app)
   };  
 }
 
