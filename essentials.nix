@@ -10,6 +10,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    jq
     tmux
     vim
     wget
